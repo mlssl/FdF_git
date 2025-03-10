@@ -1,7 +1,9 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes -I./get_next_line -I./minilibx_macos
-LDFLAGS = -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
-RM = rm -f
+# CFLAGS = -Wall -Wextra -Werror -I./includes -I./get_next_line -I./minilibx_macos
+#LDFLAGS = -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+
+CFLAGS = -Wall -Wextra -Werror -I./includes -I./get_next_line -I./minilibx
+LDFLAGS = -L./minilibx -lmlx -lX11 -lXext -lGL -lm
 
 SRCS = 	main.c \
 		get_next_line/get_next_line.c \
@@ -13,8 +15,8 @@ SRCS = 	main.c \
 		parsing/count.c \
 		draw/draw.c
 
-OBJ_DIR = obj
-OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJ_DIR = ./obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 NAME = fdf
 HEADER = ./includes/fdf.h
 
@@ -23,16 +25,16 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
+$(OBJ_DIR)/%.o: %.c $(HEADER) Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re make

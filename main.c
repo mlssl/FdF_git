@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathildelaussel <mathildelaussel@studen    +#+  +:+       +#+        */
+/*   By: mlaussel <mlaussel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:16:28 by mathildelau       #+#    #+#             */
-/*   Updated: 2025/03/06 18:42:38 by mathildelau      ###   ########.fr       */
+/*   Updated: 2025/03/10 17:20:54 by mlaussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx_macos/mlx.h"
+//#include "minilibx_macos/mlx.h"
+#include "minilibx/mlx.h"
 #include "includes/fdf.h"
 
 /*VERIFIER LE PARSING - SUPPRIMER*/
@@ -51,7 +52,7 @@ int handle_keypress(int keycode, void *param)
 int	main(int argc, char **argv)
 {
 	t_map	map;
-   
+
 	if (argc != 2)
 	{
 		printf("Usage: ./fdf <map_file>\n");

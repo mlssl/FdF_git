@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathildelaussel <mathildelaussel@studen    +#+  +:+       +#+        */
+/*   By: mlaussel <mlaussel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:50:29 by mathildelau       #+#    #+#             */
-/*   Updated: 2025/03/06 20:34:52 by mathildelau      ###   ########.fr       */
+/*   Updated: 2025/03/10 17:34:02 by mlaussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include "../minilibx_macos/mlx.h"
+#include "../minilibx/mlx.h"
+
+//#include "../minilibx_macos/mlx.h"
 
 int	get_scale(int width, int height)
 {
-	int scale_x = 800 / (width + height); // On divise par (width + height) pour tenir compte de la perspective isométrique
-	int scale_y = 600 / (width + height); // Idem pour la hauteur
+	int	scale_x;
+	int	scale_y;
+
+	scale_x = 800 / (width + height);
+	scale_y = 600 / (width + height);
 	if (scale_x < scale_y)
 		return (scale_x);
 	else
@@ -56,12 +61,12 @@ void	put_pixel_to_image(t_img *img, int x, int y, int color)
 	int	index;
 
 	if (x >= 0 && x < 800 && y >= 0 && y < 600)
-		// Vérifie que le pixel est dans la fenêtre
+	// Vérifie que le pixel est dans la fenêtre
 	{
 		index = (y * img->size_line) + (x * (img->bpp / 8));
-			// Trouve l’index du pixel
-		*(int *)(img->data + index) = color;                
-			// Écrit la couleur dans l’image
+		// Trouve l’index du pixel
+		*(int *)(img->data + index) = color;
+		// Écrit la couleur dans l’image
 	}
 }
 
@@ -100,16 +105,16 @@ void	draw_map(t_map *map)
 {
 	int	x;
 	int	y;
-	int proj_x1;
-    int proj_y1; 
-    int proj_x2;
-    int proj_y2;
-	int scale ;
-    
-    x = 0;
-    y = 0;
-    scale= get_scale(map->width, map->height);
-    while (y < map->height)
+	int	proj_x1;
+	int	proj_y1;
+	int	proj_x2;
+	int	proj_y2;
+	int	scale;
+
+	x = 0;
+	y = 0;
+	scale = get_scale(map->width, map->height);
+	while (y < map->height)
 	{
 		while (x < map->width)
 		{
@@ -127,10 +132,10 @@ void	draw_map(t_map *map)
 				proj_y2 = ft_isometric_y(x, y + 1, map->map[y + 1][x], scale);
 				ft_draw_line(map, proj_x1, proj_y1, proj_x2, proj_y2, 0xFFFFFF);
 			}
-            x++;
+			x++;
 		}
-        x = 0;
-        y++;
+		x = 0;
+		y++;
 	}
 	mlx_put_image_to_window(map->mlx, map->windows, map->image.img_ptr, 0, 0);
 }
