@@ -6,7 +6,7 @@
 /*   By: mlaussel <mlaussel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:30:41 by mathildelau       #+#    #+#             */
-/*   Updated: 2025/03/10 16:45:48 by mlaussel         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:39:30 by mlaussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ la size_line sera plus grande.*/
 /*endian représente l'ordre des octets dans lequel les couleurs sont stockées.
 Cela dépend du système utilisé :
 	Big-endian : les octets les plus significatifs sont stockés en premier.
-	Little-endian : les octets les moins significatifs sont stockés en premier.*/
+	Little-endian : les octets les moins significatifs
+	sont stockés en premier.*/
 
 typedef struct map
 {
